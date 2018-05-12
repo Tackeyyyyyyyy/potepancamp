@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title><%= full_title(yield(:title)) %></title>
-  <%= render 'layouts/meta_tags' %>
-  <%= render 'layouts/css' %>
-  <%= render 'layouts/shim' %>
-</head>
-<body>
-<div class="main-wrapper">
-  <%= render 'layouts/header' %>
-  <%= render 'layouts/light_section' %>
-  <%= yield %>
-</div>
-<%= render 'layouts/modals' %>
-<%= javascript_include_tag 'application' %>
-</body>
+  <html lang="en">
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= render 'layouts/meta_tags' %>
+    <%= render 'layouts/css' %>
+    <%= render 'layouts/shim' %>
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <%= render 'layouts/header' %>
+      <%= render 'layouts/light_section' %>
+      <%= yield %>
+    </div>
+    <%= render 'layouts/modals' %>
+    <%= javascript_include_tag 'application' %>
+  </body>
 </html>

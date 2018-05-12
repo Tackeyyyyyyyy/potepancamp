@@ -11,9 +11,10 @@
       <%= render 'layouts/header' %>
       <%= render 'layouts/light_section' %>
       <%= yield %>
+      <%= render 'layouts/footer' %>
+      <%= render 'layouts/copy_right' %>
     </div>
     <%= render 'layouts/modals' %>
-    <%= render 'layouts/footer' %>
     <%= javascript_include_tag 'application' %>
   </body>
 </html>

@@ -27,7 +27,7 @@
                <li>
                  <%= link_to potepan_category_path(children_taxon.id) do %>
                     <i class="fa fa-caret-right" aria-hidden="true"></i><%= children_taxon.name %>
-                    span>(<%= children_taxon.products.count %>)</span>
+                    <span>(<%= children_taxon.products.count %>)</span>
                  <% end %>
                 </li>
             <% end %>

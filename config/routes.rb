@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :potepan do
     root                            to: 'root#index'
+    get 'index',                    to: 'root#index'
     get :product_grid_left_sidebar, to: 'sample#product_grid_left_sidebar'
     get :product_list_left_sidebar, to: 'sample#product_list_left_sidebar'
     get :single_product,            to: 'sample#single_product'

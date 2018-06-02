@@ -11,9 +11,10 @@
         <%= render 'potepan/shared/size-filter' %>
       </div>
       <div class="col-md-9 col-sm-8 col-xs-12">
-        <%# TODO: ここらへんイケてないので後で修正 %>
         <%= render 'potepan/shared/products-sort-filter' %>
-        <%= render 'products_grid' %>
+        <div class="row">
+          <%= render  partial: 'products_grid', collection: @products, as: :product %>
+        </div>
       </div>
     </div>
   </div>

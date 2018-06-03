@@ -1,0 +1,39 @@
+<% @taxonomies.each do |root_taxon| %>　
+　<%# TODO: ここらへんイケてないので後で修正 %>
+  <% next if (root_taxon.taxons.size < 2) %>
+  <div class="panel panel-default">
+    <div class="panel-heading"><%= root_taxon.name %></div>
+    <div class="panel-body">
+      <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
+        <ul class="nav navbar-nav side-nav">
+          <% root_taxon.taxons.each do |children_taxon| %>
+            <% next if children_taxon.depth == 0 %>
+            <% if children_taxon.children.any? %>
+              <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#<%= children_taxon.name.downcase %>"><%= children_taxon.name %><i class="fa fa-plus"></i></a>
+                <ul id="<%= children_taxon.name.downcase %>" class="collapse collapseItem">
+                  <% (children_taxon.children).each do |child| %>
+                    <li>
+                      <%= link_to potepan_category_path(child.id) do %>
+                        <i class="fa fa-caret-right" aria-hidden="true"></i><%= child.name %>
+                           <span>(<%= child.products.size %>)</span></a>
+                         <% end %>
+                    </li>
+                   <% end %>
+                 </ul>
+               </li>
+             <% else %>
+               <% next if (children_taxon.products.count == 0 || children_taxon.depth == 2)  %>
+               <li>
+                 <%= link_to potepan_category_path(children_taxon.id) do %>
+                    <i class="fa fa-caret-right" aria-hidden="true"></i><%= children_taxon.name %>
+                    <span>(<%= children_taxon.products.count %>)</span>
+                 <% end %>
+                </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>

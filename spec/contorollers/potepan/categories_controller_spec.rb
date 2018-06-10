@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Potepan::CategoriesController, type: :controller do
   describe "show Action successfull" do
     let(:taxon) {create(:taxon)}
+    let(:taxonomies) { Spree::Taxonomy.includes(:taxons) }
     before do
       get :show, params: {id: taxon.id}
     end
@@ -19,5 +20,8 @@ RSpec.describe Potepan::CategoriesController, type: :controller do
       expect(assigns(:taxon)).to eq taxon
     end
 
+    it '@taxonomiesが期待される値を持つこと' do
+      expect(assigns(:taxonomies)).to eq taxonomies
+    end
   end
 end

@@ -9,13 +9,16 @@
              <% if children_taxon.children.any? %>
                 <li>
                   <a href="javascript:;" data-toggle="collapse" data-target="#<%= children_taxon.name.downcase %>"><%= children_taxon.name %>
-                    <i class="fa fa-plus"></i></a>
+                    <i class="fa fa-plus"></i>
+                  </a>
                   <ul id="<%= children_taxon.name.downcase %>" class="collapse collapseItem">
                     <% (children_taxon.children).each do |child| %>
                         <li>
                           <%= link_to potepan_category_path(child.id) do %>
-                              <i class="fa fa-caret-right" aria-hidden="true"></i><%= child.name %>
-                              <span>(<%= child.products.size %>)</span></a>
+                              <i class="fa fa-caret-right" aria-hidden="true"></i>
+                              <%= child.name %>
+                              <span>(<%= child.products.size %>)</span>
+                          </a>
                           <% end %>
                         </li>
                     <% end %>

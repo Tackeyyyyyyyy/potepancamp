@@ -5,15 +5,16 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3 col-sm-4 col-xs-12 sideBar">
-        <%= render 'potepan/shared/categories' %>
+        <%= render 'potepan/shared/categories', locals: { taxonomies: @taxonomies } %>
         <%= render 'potepan/shared/price-range-filter' %>
         <%= render 'potepan/shared/color-filter' %>
         <%= render 'potepan/shared/size-filter' %>
       </div>
       <div class="col-md-9 col-sm-8 col-xs-12">
-        <%# TODO: ここらへんイケてないので後で修正 %>
         <%= render 'potepan/shared/products-sort-filter' %>
-        <%= render 'products_grid' %>
+        <div class="row">
+          <%= render  partial: 'products_grid', collection: @products, as: :product %>
+        </div>
       </div>
     </div>
   </div>

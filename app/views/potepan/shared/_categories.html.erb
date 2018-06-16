@@ -8,10 +8,10 @@
             <% taxonomy.root.children.each do |children_taxon| %>
              <% if children_taxon.children.any? %>
                 <li>
-                  <a href="javascript:;" data-toggle="collapse" data-target="#<%= children_taxon.name %>_<%= children_taxon.id %>"><%= children_taxon.name %>
+                  <a href="javascript:;" data-toggle="collapse" data-target="#category-<%= children_taxon.id %>"><%= children_taxon.name %>
                     <i class="fa fa-plus"></i>
                   </a>
-                  <ul id="<%= children_taxon.name.downcase %>" class="collapse collapseItem">
+                  <ul id="category-<%= children_taxon.id %>" class="collapse collapseItem">
                     <% (children_taxon.children).each do |child| %>
                        <li>
                           <%= link_to potepan_category_path(child.id) do %>

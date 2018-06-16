@@ -54,7 +54,7 @@ RSpec.describe Potepan::ProductsController, type: :controller do
       expect(assigns(:related_products)).not_to include(mugs_products)
     end
 
-    it '関連する製品の取得件数が[RELATED_PRODUCTS_DISPLAY_LIMIT] 以下であること' do
+    it '関連する製品の取得件数が [RELATED_PRODUCTS_DISPLAY_LIMIT] を超えないこと' do
       bugs_product = bugs_products.first
       get :show, params: {id: bugs_product.id}
       expect(assigns(:related_products).count).to be <= related_products_count

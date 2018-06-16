@@ -3,7 +3,7 @@ class Potepan::ProductsController < ApplicationController
 
   def show
     @product = Spree::Product.find(params[:id])
-    @related_products = Spree::Product.related_products(@product).limit(4)
+    @related_products = Spree::Product.related_products(@product).order("RAND()").limit(RELATED_PRODUCTS_DISPLAY_LIMIT)
   end
   
 end

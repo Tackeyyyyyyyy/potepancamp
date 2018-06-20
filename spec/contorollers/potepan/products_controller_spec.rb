@@ -9,7 +9,7 @@ RSpec.describe Potepan::ProductsController, type: :controller do
     let(:ruby_taxon) {create(:taxon, name: 'Ruby', taxonomy: taxonomy_brands)}
     let(:mugs_taxon) {create(:taxon, name: 'Mugs', taxonomy: taxonomy_categories)}
     let(:bags_taxon) {create(:taxon, name: 'Bags', taxonomy: taxonomy_categories)}
-    let(:related_products_count) { Potepan::ProductsController::RELATED_PRODUCTS_DISPLAY_LIMIT }
+    let(:related_products_count) { 4 }
 
     let(:mugs_products) do
       create_list(:product, 4) do |product|

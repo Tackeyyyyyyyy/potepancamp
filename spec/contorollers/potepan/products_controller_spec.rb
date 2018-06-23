@@ -9,11 +9,17 @@ RSpec.describe Potepan::ProductsController, type: :controller do
     let(:ruby_taxon) {create(:taxon, name: 'Ruby', taxonomy: taxonomy_brands)}
     let(:mugs_taxon) {create(:taxon, name: 'Mugs', taxonomy: taxonomy_categories)}
     let(:bags_taxon) {create(:taxon, name: 'Bags', taxonomy: taxonomy_categories)}
-    let(:related_products_count) { 4 }
 
     let(:mugs_products) do
       create_list(:product, 4) do |product|
         product.taxons << rails_taxon
+        product.taxons << mugs_taxon
+      end
+    end
+
+    let(:ruby_products) do
+      create_list(:product, 5) do |product|
+        product.taxons << ruby_taxon
         product.taxons << mugs_taxon
       end
     end
@@ -24,6 +30,7 @@ RSpec.describe Potepan::ProductsController, type: :controller do
         product.taxons << bags_taxon
       end
     end
+
 
     before do
       get :show, params: {id: product.id}
@@ -54,10 +61,28 @@ RSpec.describe Potepan::ProductsController, type: :controller do
       expect(assigns(:related_products)).not_to include(mugs_products)
     end
 
-    it '関連する製品の取得件数が [RELATED_PRODUCTS_DISPLAY_LIMIT] を超えないこと' do
-      bugs_product = bugs_products.first
-      get :show, params: {id: bugs_product.id}
-      expect(assigns(:related_products).count).to be <= related_products_count
+    context '関連する製品が3つの場合' do
+      it '関連する製品の取得件数が3件であること' do
+        mugs_product = mugs_products.first
+        get :show, params: {id: mugs_product.id}
+        expect(assigns(:related_products).count).to eq 3
+      end
+    end
+
+    context '関連する製品が4つの場合' do
+      it '関連する製品の取得件数が4件であること' do
+        ruby_product = ruby_products.first
+        get :show, params: {id: ruby_product.id}
+        expect(assigns(:related_products).count).to eq 4
+      end
+    end
+
+    context '関連する製品が5つの場合' do
+      it '関連する製品の取得件数が4件であること' do
+        bugs_product = bugs_products.first
+        get :show, params: {id: bugs_product.id}
+        expect(assigns(:related_products).count).to eq 4
+      end
     end
   end
 end

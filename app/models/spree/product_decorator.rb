@@ -7,7 +7,7 @@ Spree::Product.class_eval do
   }
 
   # @param [int] size
-  # @return ActiveRecord::Relation
+  # @return array
   def related_products(size)
     limit = size * 2
     Spree::Product.include_price_and_image.related(self).limit(limit).sample(size)

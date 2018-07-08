@@ -10,27 +10,26 @@ RSpec.describe Potepan::ProductsController, type: :controller do
     let(:mugs_taxon) {create(:taxon, name: 'Mugs', taxonomy: taxonomy_categories)}
     let(:bags_taxon) {create(:taxon, name: 'Bags', taxonomy: taxonomy_categories)}
 
-    let(:mugs_products) do
+    let(:mugs_products_by_rails_brand) do
       create_list(:product, 4) do |product|
         product.taxons << rails_taxon
         product.taxons << mugs_taxon
       end
     end
 
-    let(:ruby_products) do
+    let(:ruby_products_by_ruby_brand) do
       create_list(:product, 5) do |product|
         product.taxons << ruby_taxon
         product.taxons << mugs_taxon
       end
     end
 
-    let(:bugs_products) do
+    let(:bugs_products_by_ruby_brand) do
       create_list(:product, 6) do |product|
         product.taxons << ruby_taxon
         product.taxons << bags_taxon
       end
     end
-
 
     before do
       get :show, params: {id: product.id}
@@ -49,21 +48,21 @@ RSpec.describe Potepan::ProductsController, type: :controller do
     end
 
     it "関連する製品には同じカテゴリーの製品が含まれること" do
-      mugs_product = mugs_products.first
-      related_products = (mugs_products - [mugs_product])
+      mugs_product = mugs_products_by_rails_brand.first
+      related_products = (mugs_products_by_rails_brand - [mugs_product])
       get :show, params: {id: mugs_product.id}
       expect(assigns(:related_products)).to match_array related_products
     end
 
     it '関連する製品に他のカテゴリーは含まないこと' do
-      bugs_product = bugs_products.first
+      bugs_product = bugs_products_by_ruby_brand.first
       get :show, params: {id: bugs_product.id}
-      expect(assigns(:related_products)).not_to include(mugs_products)
+      expect(assigns(:related_products)).not_to include(mugs_products_by_rails_brand)
     end
 
     context '関連する製品が3つの場合' do
       it '関連する製品の取得件数が3件であること' do
-        mugs_product = mugs_products.first
+        mugs_product = mugs_products_by_rails_brand.first
         get :show, params: {id: mugs_product.id}
         expect(assigns(:related_products).count).to eq 3
       end
@@ -71,7 +70,7 @@ RSpec.describe Potepan::ProductsController, type: :controller do
 
     context '関連する製品が4つの場合' do
       it '関連する製品の取得件数が4件であること' do
-        ruby_product = ruby_products.first
+        ruby_product = ruby_products_by_ruby_brand.first
         get :show, params: {id: ruby_product.id}
         expect(assigns(:related_products).count).to eq 4
       end
@@ -79,7 +78,7 @@ RSpec.describe Potepan::ProductsController, type: :controller do
 
     context '関連する製品が5つの場合' do
       it '関連する製品の取得件数が4件であること' do
-        bugs_product = bugs_products.first
+        bugs_product = bugs_products_by_ruby_brand.first
         get :show, params: {id: bugs_product.id}
         expect(assigns(:related_products).count).to eq 4
       end

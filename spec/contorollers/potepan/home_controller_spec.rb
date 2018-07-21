@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Potepan::RootController, type: :controller do
+RSpec.describe Potepan::HomeController, type: :controller do
   describe "index Action successfull" do
     before do
       get :index

@@ -3,8 +3,10 @@ require 'rails_helper'
 RSpec.describe Potepan::ProductsController, type: :controller do
   describe "show Action successfull" do
     let(:target_product) {create(:product)}
+
     let(:taxonomy_categories) {create(:taxonomy, name: 'Categories')}
     let(:taxonomy_brands) {create(:taxonomy, name: 'Brands')}
+
     let(:rails_taxon) {create(:taxon, name: 'Rails', taxonomy: taxonomy_brands)}
     let(:ruby_taxon) {create(:taxon, name: 'Ruby', taxonomy: taxonomy_brands)}
     let(:apache_taxon) {create(:taxon, name: 'Apache', taxonomy: taxonomy_brands)}

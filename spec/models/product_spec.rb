@@ -4,6 +4,7 @@ RSpec.describe Spree::Product, type: :model do
   describe "related_products test" do
     let(:taxonomy_categories) {create(:taxonomy, name: 'Categories')}
     let(:taxonomy_brands) {create(:taxonomy, name: 'Brands')}
+
     let(:rails_taxon) {create(:taxon, name: 'Rails', taxonomy: taxonomy_brands)}
     let(:ruby_taxon) {create(:taxon, name: 'Ruby', taxonomy: taxonomy_brands)}
     let(:mugs_taxon) {create(:taxon, name: 'Mugs', taxonomy: taxonomy_categories)}

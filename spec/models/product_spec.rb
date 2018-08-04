@@ -52,5 +52,24 @@ RSpec.describe Spree::Product, type: :model do
         expect(related_mugs_products).not_to include mugs_products_by_rails_brand
       end
     end
+
+    describe "new_products test" do
+      let!(:products_1_day_ago) {create(:product, available_on: 1.day.ago)}
+      let!(:products_2_days_ago) {create(:product, available_on: 2.days.ago)}
+      let!(:products_3_days_ago) {create(:product, available_on: 3.days.ago)}
+      let!(:products_4_days_ago) {create(:product, available_on: 4.days.ago)}
+
+      it "new_productsの取得数が正しいこと" do
+        expect(Spree::Product.new_products(3).count).to eq 3
+      end
+
+      it "new_productsの並び順が正しいこと" do
+        expect(Spree::Product.new_products(3)).to match [products_1_day_ago, products_2_days_ago, products_3_days_ago]
+      end
+
+      it "new_productsに古い商品が含まれないこと" do
+        expect(Spree::Product.new_products(3)).not_to include products_4_days_ago
+      end
+    end
   end
 end

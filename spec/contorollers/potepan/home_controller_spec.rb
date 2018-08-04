@@ -2,9 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Potepan::HomeController, type: :controller do
   describe "index Action successfull" do
-    let(:available_products_count) {4}
-    let(:new_products) {create_list(:product, available_products_count, name: 'new_product', available_on: 1.hour.ago)}
-    let(:old_products) {create_list(:product, 3, name: 'old_product', available_on: 2.hours.ago)}
+    let!(:available_products_count) {4}
+    let!(:new_products) do
+      [
+          create(:product, available_on: 1.day.ago),
+          create(:product, available_on: 2.day.ago),
+          create(:product, available_on: 3.day.ago),
+          create(:product, available_on: 4.day.ago)
+      ]
+    end
+    let!(:old_products) {create(:product, available_on: 1.month.ago)}
 
     before do
       get :index

@@ -1,0 +1,8 @@
+<div class="row productsContent">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h4>関連商品</h4>
+    </div>
+  </div>
+  <%= render partial: 'potepan/shared/products-grid', collection: related_products, as: :product, layout: 'potepan/shared/product-layout' %>
+</div>

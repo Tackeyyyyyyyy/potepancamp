@@ -1,5 +1,5 @@
 # potepancamp
 - Ruby on Rails
-- Rspec
+- RSpec
 - Solidus
 - MySQL
